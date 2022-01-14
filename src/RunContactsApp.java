@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
-public class HelloWorld {
-
+public class RunContactsApp {
 
     public static void runContactsApp(){
         boolean run = true;
@@ -41,13 +40,7 @@ public class HelloWorld {
     }
 
 
-
-
     public static void main(String[] args) {
-
-
-
-
 
 
 
@@ -55,5 +48,6 @@ public class HelloWorld {
 
 
     }
-}
 
+
+}
