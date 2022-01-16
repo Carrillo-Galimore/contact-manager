@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class RunContactsApp {
@@ -31,7 +32,32 @@ public class RunContactsApp {
         }
 
     }
+    public static void viewList(){
+        String directory = "contactsData";
+        String filename = "contactsList.txt";
 
+        Path dataDirectory = Paths.get(directory);
+        Path dataFile = Paths.get(directory, filename);
+
+
+
+        try{
+            if(Files.notExists(dataDirectory)){
+                Files.createDirectory(dataDirectory);
+            }
+            if(Files.notExists(dataFile)) {
+                Files.createFile(dataFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }try{
+            List<String> contacts = Files.readAllLines(dataFile);
+            for(String contact : contacts){
+                System.out.println(contact);
+            }
+        } catch (IOException iox){
+            iox.printStackTrace();
+        }
 
     public static void runContactsApp(){
         boolean run = true;
@@ -46,7 +72,7 @@ public class RunContactsApp {
             int userinput = scn.nextInt();
             switch (userinput){
                 case 1:
-                    // view contact/function
+                    viewList();
                     System.out.println("Returned to Menu.");
                     break;
                 case 2:
