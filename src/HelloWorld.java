@@ -56,7 +56,9 @@ public class HelloWorld {
         }
 
     }
-
+public static void viewList(){
+    System.out.println("");
+    }
 
     public static void main(String[] args) {
 //        createDirFile("contactsDirectory", "contactList.txt");
