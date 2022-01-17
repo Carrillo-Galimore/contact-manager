@@ -30,9 +30,10 @@ public class RunContactsApp {
         } catch (IOException iox){
             iox.printStackTrace();
         }
-
+        System.out.println();
     }
-    public static void viewList(){
+
+    public static void  viewList(){
         String directory = "contactsData";
         String filename = "contactsList.txt";
 
@@ -40,30 +41,33 @@ public class RunContactsApp {
         Path dataFile = Paths.get(directory, filename);
 
 
-
-        try{
-            if(Files.notExists(dataDirectory)){
+        try {
+            if (Files.notExists(dataDirectory)) {
                 Files.createDirectory(dataDirectory);
             }
-            if(Files.notExists(dataFile)) {
+            if (Files.notExists(dataFile)) {
                 Files.createFile(dataFile);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }try{
+        }
+        try {
             List<String> contacts = Files.readAllLines(dataFile);
-            for(String contact : contacts){
+            for (String contact : contacts) {
                 System.out.println(contact);
             }
-        } catch (IOException iox){
+        } catch (IOException iox) {
             iox.printStackTrace();
         }
+    }
+
+
 
     public static void runContactsApp(){
         boolean run = true;
         while(run){
             System.out.println("1. View Contacts\n");
-            System.out.println("2, Add a new Contact.\n");
+            System.out.println("2. Add a new Contact.\n");
             System.out.println("3. Search a contact by name.\n");
             System.out.println("4. Delete an existing contact.\n");
             System.out.println("5. Exit\n");
@@ -73,7 +77,7 @@ public class RunContactsApp {
             switch (userinput){
                 case 1:
                     viewList();
-                    System.out.println("Returned to Menu.");
+                    System.out.println("\nReturned to Menu.\n");
                     break;
                 case 2:
                     addToTextFile();
