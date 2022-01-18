@@ -41,21 +41,21 @@ public class HelloWorld {
         String contactList = "contactsList.txt";
         Path contactsFile = Paths.get(contactsDirectory, contactList);
         System.out.println("Please enter the contact you would like to remove.");
-            Scanner scn = new Scanner(System.in);
-            String userInput = scn.nextLine();
-            try{
-                List<String> contacts = Files.readAllLines(Paths.get(contactsDirectory, contactList));
-                List<String> bucket = new ArrayList<>();
-                for(String contact : contacts){
-                    if(!contact.equalsIgnoreCase(userInput)){
-                        bucket.add(contact);
-                    }
-                    System.out.println(bucket);
-                    Files.write(contactsFile, bucket);
+        Scanner scn = new Scanner(System.in);
+        String userInput = scn.nextLine();
+        try{
+            List<String> contacts = Files.readAllLines(Paths.get(contactsDirectory, contactList));
+            List<String> bucket = new ArrayList<>();
+            for(String contact : contacts){
+                if(!contact.equalsIgnoreCase(userInput)){
+                    bucket.add(contact);
                 }
-            }catch(IOException iox){
-                iox.printStackTrace();
+                System.out.println(bucket);
+                Files.write(contactsFile, bucket);
             }
+        }catch(IOException iox){
+            iox.printStackTrace();
+        }
     }
 
 
@@ -124,23 +124,23 @@ public class HelloWorld {
         do {
             try{
                 List<String> contacts = Files.readAllLines(dataFile);
-                    for (String contact : contacts) {
-                        if (userInput.equalsIgnoreCase(contact)) {
-                            System.out.println(contact);
-                            break;
+                for (String contact : contacts) {
+                    if (userInput.equalsIgnoreCase(contact)) {
+                        System.out.println(contact);
+                        break;
                     } else {
-                            System.out.println("Did not find a match.");
-                            System.out.println("Try again? yes/no");
-                            Scanner scn = new Scanner(System.in);
-                            keepGoing = scn.nextBoolean();
-                            System.out.println("enter a name.");
-                            Scanner sc = new Scanner(System.in);
-                            userInput = sc.nextLine();
-                        }
+                        System.out.println("Did not find a match.");
+                        System.out.println("Try again? yes/no");
+                        Scanner scn = new Scanner(System.in);
+                        keepGoing = scn.nextBoolean();
+                        System.out.println("enter a name.");
+                        Scanner sc = new Scanner(System.in);
+                        userInput = sc.nextLine();
+                    }
                 }
             } catch (IOException iox){
-            iox.printStackTrace();
-        }
+                iox.printStackTrace();
+            }
         } while  (keepGoing);
     }
 
@@ -195,4 +195,3 @@ public class HelloWorld {
 
     }
 }
-
