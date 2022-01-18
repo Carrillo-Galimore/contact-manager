@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -103,6 +104,29 @@ public static void contactSearch(){
         } while  (keepGoing.equalsIgnoreCase("yes") );
         }
 
+    public static void removeContact(){
+        viewList();
+        String contactsDirectory = "contactsData";
+        String contactList = "contactsList.txt";
+        Path contactsFile = Paths.get(contactsDirectory, contactList);
+        System.out.println("Please enter the contact you would like to remove.");
+        Scanner scn = new Scanner(System.in);
+        String userInput = scn.nextLine();
+        try{
+            List<String> contacts = Files.readAllLines(Paths.get(contactsDirectory, contactList));
+            List<String> bucket = new ArrayList<>();
+            for(String contact : contacts){
+                if(!contact.equalsIgnoreCase(userInput)){
+                    bucket.add(contact);
+                }
+                System.out.println(bucket);
+                Files.write(contactsFile, bucket);
+            }
+        }catch(IOException iox){
+            iox.printStackTrace();
+        }
+    }
+
     public static void runContactsApp(){
         boolean run = true;
         while(run){
@@ -128,7 +152,7 @@ public static void contactSearch(){
                     System.out.println("Returned to Menu.");
                     break;
                 case 4:
-                    // delete contact (by name)
+                    removeContact();
                     System.out.println("Returned to Menu.");
                     break;
                 case 5:
