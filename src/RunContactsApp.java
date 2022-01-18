@@ -143,34 +143,34 @@ public class RunContactsApp {
     public static void runContactsApp(){
         boolean run = true;
         while(run){
-            System.out.println("1. View Contacts\n");
-            System.out.println("2, Add a new Contact.\n");
-            System.out.println("3. Search a contact by name.\n");
-            System.out.println("4. Delete an existing contact.\n");
-            System.out.println("5. Exit\n");
-            System.out.println("Enter an option: (1, 2, 3, 4, or 5\n)");
+            System.out.println("1. View Contacts.");
+            System.out.println("2. Add a new Contact.");
+            System.out.println("3. Search a contact by name.");
+            System.out.println("4. Delete an existing contact.");
+            System.out.println("5. Exit.");
+            System.out.println("Enter an option: (1, 2, 3, 4, or 5)");
             Scanner scn = new Scanner(System.in);
             int userinput = scn.nextInt();
             switch (userinput){
                 case 1:
                     viewList();
-                    System.out.println("Returned to Menu.");
+                    System.out.println("Returned to Menu.\n");
                     break;
                 case 2:
                     addToTextFile();
-                    System.out.println("Returned to Menu.");
+                    System.out.println("Returned to Menu.\n");
                     break;
                 case 3:
                      contactSearch();
-                    System.out.println("Returned to Menu.");
+                    System.out.println("Returned to Menu.\n");
                     break;
                 case 4:
                     removeContact();
-                    System.out.println("Returned to Menu.");
+                    System.out.println("Returned to Menu.\n");
                     break;
                 case 5:
                     exitFunction();
-                    System.out.println("Exiting application. ");
+                    System.out.println("Exiting application.\n");
                     run = false;
                     break;
             }
