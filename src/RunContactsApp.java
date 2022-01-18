@@ -126,6 +126,19 @@ public static void contactSearch(){
         }
     }
 
+    public static void exitFunction(){
+        String directory = "contactsData";
+        String filename = "contactsList.txt";
+        Path dataFile = Paths.get(directory, filename);
+        try{
+            List<String> contacts = Files.readAllLines(dataFile);
+            Files.write(dataFile, contacts);
+
+        } catch (IOException iox){
+            iox.printStackTrace();
+        }
+
+    }
     public static void runContactsApp(){
         boolean run = true;
         while(run){
@@ -155,7 +168,7 @@ public static void contactSearch(){
                     System.out.println("Returned to Menu.");
                     break;
                 case 5:
-                    // exit function/app
+                    exitFunction();
                     System.out.println("Exiting application. ");
                     run = false;
                     break;
