@@ -23,7 +23,6 @@ public class RunContactsApp {
         String contactsDirectory = "contactsData";
         String contactList = "contactsList.txt";
 
-//        Path contactDataList = Paths.get(contactsDirectory);
         Path contactsFile = Paths.get(contactsDirectory, contactList);
 
         try{
@@ -135,7 +134,7 @@ public static void contactSearch(){
             System.out.println("3. Search a contact by name.\n");
             System.out.println("4. Delete an existing contact.\n");
             System.out.println("5. Exit\n");
-            System.out.println("Enter an option: (1, 2, 3, 4, or 5\n");
+            System.out.println("Enter an option: (1, 2, 3, 4, or 5\n)");
             Scanner scn = new Scanner(System.in);
             int userinput = scn.nextInt();
             switch (userinput){

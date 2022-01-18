@@ -144,7 +144,19 @@ public class HelloWorld {
         } while  (keepGoing);
     }
 
+public static void exitFunction(){
+    String directory = "contactsData";
+    String filename = "contactsList.txt";
+    Path dataFile = Paths.get(directory, filename);
+    try{
+        List<String> contacts = Files.readAllLines(dataFile);
+        Files.write(dataFile, contacts);
 
+    } catch (IOException iox){
+        iox.printStackTrace();
+    }
+
+}
 
 
     public static void main(String[] args) {
