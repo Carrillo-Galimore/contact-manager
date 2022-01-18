@@ -4,10 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class HelloWorld {
 
@@ -50,9 +47,11 @@ public class HelloWorld {
                 if(!contact.equalsIgnoreCase(userInput)){
                     bucket.add(contact);
                 }
-                System.out.println(bucket);
+//
                 Files.write(contactsFile, bucket);
+//                System.out.println(bucket);
             }
+            viewList();
         }catch(IOException iox){
             iox.printStackTrace();
         }
@@ -115,29 +114,40 @@ public class HelloWorld {
         String filename = "contactsList.txt";
         Path dataFile = Paths.get(directory, filename);
 
-        System.out.println("Please enter Name or Number you would like to search");
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine();
-
         boolean keepGoing = true;
 
         do {
+            boolean found = true;
             try{
                 List<String> contacts = Files.readAllLines(dataFile);
-                for (String contact : contacts) {
-                    if (userInput.equalsIgnoreCase(contact)) {
-                        System.out.println(contact);
-                        break;
+                System.out.println("Input your name.");
+                Scanner sc = new Scanner(System.in);
+                String userInput = sc.nextLine();
+
+                for (int i =0; i < contacts.size(); i++) {
+//                    System.out.println(contacts.get(i));
+                    if (contacts.get(i).toLowerCase().contains(userInput.toLowerCase())) {
+                        System.out.println(contacts.get(i));
+                        found = false;
+
                     } else {
+                        if(found && i == contacts.size()-1)
                         System.out.println("Did not find a match.");
-                        System.out.println("Try again? yes/no");
-                        Scanner scn = new Scanner(System.in);
-                        keepGoing = scn.nextBoolean();
-                        System.out.println("enter a name.");
-                        Scanner sc = new Scanner(System.in);
-                        userInput = sc.nextLine();
+
                     }
+
                 }
+                System.out.println("Would you like to continue? yes/no");
+                String proceed = "yes";
+                String notproceeding = "no";
+                String userChoice = sc.nextLine();
+                if(userChoice.equalsIgnoreCase("yes")){
+                    keepGoing = true;
+                } else if(userChoice.equalsIgnoreCase("no")){
+                    keepGoing = false;
+                }
+
+
             } catch (IOException iox){
                 iox.printStackTrace();
             }
@@ -186,10 +196,10 @@ public class HelloWorld {
 //        createDirFile("testDirector", "text.tx");
 //        addToTextFile();
 
-        removeContact();
+//        removeContact();
 //        viewList();
 
-//        contactSearch();
+        contactSearch();
 
 
 
