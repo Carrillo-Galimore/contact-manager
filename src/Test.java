@@ -1,138 +1,126 @@
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
 public class Test {
 
 
-public static void viewList(){
-    String directory = "contactsData";
-    String filename = "contactsList.txt";
+    public static void viewList() {
+        String directory = "contactsData";
+        String filename = "contactsList.txt";
 
-    Path dataDirectory = Paths.get(directory);
-    Path dataFile = Paths.get(directory, filename);
+        Path dataDirectory = Paths.get(directory);
+        Path dataFile = Paths.get(directory, filename);
 
 
-
-    try{
-        if(Files.notExists(dataDirectory)){
-            Files.createDirectory(dataDirectory);
+        try {
+            if (Files.notExists(dataDirectory)) {
+                Files.createDirectory(dataDirectory);
+            }
+            if (Files.notExists(dataFile)) {
+                Files.createFile(dataFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        if(Files.notExists(dataFile)) {
-            Files.createFile(dataFile);
+        try {
+            List<String> contacts = Files.readAllLines(dataFile);
+            for (String contact : contacts) {
+                System.out.println(contact);
+            }
+        } catch (IOException iox) {
+            iox.printStackTrace();
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }try{
-        List<String> contacts = Files.readAllLines(dataFile);
-        for(String contact : contacts){
-            System.out.println(contact);
-        }
-    } catch (IOException iox){
-        iox.printStackTrace();
     }
-}
+//    public  Contact (String name){
+//    this.name = name;
+//}
+//
+//    public String getName(Contact contact) {
+//        return contact.name;
+//    }
+
+//    public static void contactSearch() throws IOException {
+//
+//        System.out.println("Please enter Name or Number you would like to search");
+//        Scanner scanner = new Scanner(System.in);
+//        String userInput = scanner.nextLine();
+//        String directory = "contactsData";
+//        String filename = "contactsList.txt";
+//        Path dataDirectory = Paths.get(directory);
+//        Path dataFile = Paths.get(directory, filename);
+//        List<String> contacts = Files.readAllLines(dataFile);
+//        for (String contact : contacts) {
+//            if (contact.equalsIgnoreCase(userInput)) {
+//                System.out.print(contact);
+//            } else {
+//                System.out.println("This person does not exist");
+//            }
+//
+//
+//        }
+//    }
+//
+        public static void contactSearch(){
+            String directory = "contactsData";
+            String filename = "contactsList.txt";
+
+            Path dataDirectory = Paths.get(directory);
+            Path dataFile = Paths.get(directory, filename);
+
+            System.out.println("Please enter Name or Number you would like to search");
+            Scanner scanner = new Scanner(System.in);
+            String userInput = scanner.nextLine();
+
+            String keepGoing = "yes";
+
+            do {
+                try{
+                    List<String> contacts = Files.readAllLines(dataFile);
+                    for (String contact : contacts) {
+                        if (userInput.equalsIgnoreCase(contact)) {
+                            System.out.println("The contact info you entered matches: " + contact);
+                            break;
+                        } else {
+                            System.out.println("Did not find a match.");
+                        }
+
+                    }
+
+                } catch (IOException iox){
+                    iox.printStackTrace();
+                }
+
+                System.out.println("Try again? yes/no");
+                Scanner scn = new Scanner(System.in);
+                keepGoing = scn.next();
+                if(keepGoing.equalsIgnoreCase("no")){
+                    break;
+                }
 
 
+                System.out.println("enter a name.");
+                Scanner sc = new Scanner(System.in);
+                userInput = sc.nextLine();
+            } while  (keepGoing.equalsIgnoreCase("yes") );
+        }
 
-        public static void main(String[] args) throws IOException {
+
+        public static void main (String[]args) throws IOException {
 //            ArrayList<Object> ppl = new ArrayList<>();
 //            ppl.add("ddd");
 //            ppl.add(2);
 //            ppl.add(11122.33);
 //            System.out.println(ppl);
-viewList();
-
-//        File creation
-
-//
-//            String directory = "contactsData";
-//            String filename = "contactsList.txt";
-//
-//            Path dataDirectory = Paths.get(directory);
-//            Path dataFile = Paths.get(directory, filename);
-//
-//            System.out.println(dataDirectory);
-//            System.out.println(dataFile);
-//
-//            try{
-//                if(Files.notExists(dataDirectory)){
-//                    Files.createDirectory(dataDirectory);
-//                }
-//                if(Files.notExists(dataFile)) {
-//                    Files.createFile(dataFile);
-//                }
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            try{
-//                List<String> contacts = Files.readAllLines(dataFile);
-//                for(String contact : contacts){
-//                    System.out.println(contact);
-//                }
-//            } catch (IOException iox){
-//                iox.printStackTrace();
-//            }
-//            boolean run = true;
-//            while(run){
-//
-//
-//
-//                Scanner sc = new Scanner(System.in);
-//                System.out.println("1. View contacts.");
-//                System.out.println("2. Add a new contact.");
-//                System.out.println("3. Search a contact by name.");
-//                System.out.println("4. Delete an existing contact.");
-//                System.out.println("5. Exit.");
-//                System.out.println("Enter an option (1, 2, 3, 4 or 5):");
-//
-//                int userChoice = sc.nextInt();
-//
-//
-//                if(userChoice == 1){
-
-//                    List<String> contacts = Files.readAllLines(dataFile);
-//                    for(String contact : contacts){
-//                        System.out.println(contact);
-//                    }
-//                    break;
-                }
-//                if(userChoice == 2){
-//                    System.out.println("Please enter a name and number.");
-//                    String userInput = sc.nextLine();
-//                    Files.write(dataFile, List.of(userInput));
-//
-//                    break;
-//                }
-//                if(userChoice == 3){
-//                    String userInput = sc.nextLine();
-////            search function
-//                }
-//                if(userChoice == 4){
-//                    String userInput = sc.nextLine();
-////            delete function
-//                }
-//                if(userChoice == 5){
-//                    String userInput = sc.nextLine();
-////            exit function
-//                }else {
-//                    System.out.println("meh");
-//                }
-
-            }
+            viewList();
+            contactSearch();
+        }
 
 
-
-//        }
-//
-//    }
-
-
+    }
 
 

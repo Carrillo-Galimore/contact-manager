@@ -32,7 +32,7 @@ public class RunContactsApp {
         }
 
     }
-    public static void viewList(){
+    public static void viewList() {
         String directory = "contactsData";
         String filename = "contactsList.txt";
 
@@ -40,23 +40,67 @@ public class RunContactsApp {
         Path dataFile = Paths.get(directory, filename);
 
 
-
-        try{
-            if(Files.notExists(dataDirectory)){
+        try {
+            if (Files.notExists(dataDirectory)) {
                 Files.createDirectory(dataDirectory);
             }
-            if(Files.notExists(dataFile)) {
+            if (Files.notExists(dataFile)) {
                 Files.createFile(dataFile);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }try{
+        }
+        try {
             List<String> contacts = Files.readAllLines(dataFile);
-            for(String contact : contacts){
+            for (String contact : contacts) {
                 System.out.println(contact);
             }
-        } catch (IOException iox){
+        } catch (IOException iox) {
             iox.printStackTrace();
+        }
+    }
+public static void contactSearch(){
+        String directory = "contactsData";
+        String filename = "contactsList.txt";
+//
+        Path dataDirectory = Paths.get(directory);
+        Path dataFile = Paths.get(directory, filename);
+
+        System.out.println("Please enter Name or Number you would like to search");
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+
+        String keepGoing = "yes";
+
+        do {
+        try{
+        List<String> contacts = Files.readAllLines(dataFile);
+        for (String contact : contacts) {
+        if (userInput.equalsIgnoreCase(contact)) {
+        System.out.println("The contact info you entered matches: " + contact);
+        break;
+        } else {
+        System.out.println("Did not find a match.");
+        }
+
+        }
+
+        } catch (IOException iox){
+        iox.printStackTrace();
+        }
+
+        System.out.println("Try again? yes/no");
+        Scanner scn = new Scanner(System.in);
+        keepGoing = scn.next();
+        if(keepGoing.equalsIgnoreCase("no")){
+        break;
+        }
+
+
+        System.out.println("enter a name.");
+        Scanner sc = new Scanner(System.in);
+        userInput = sc.nextLine();
+        } while  (keepGoing.equalsIgnoreCase("yes") );
         }
 
     public static void runContactsApp(){
@@ -80,7 +124,7 @@ public class RunContactsApp {
                     System.out.println("Returned to Menu.");
                     break;
                 case 3:
-                    // add search contact by name method/function
+                     contactSearch();
                     System.out.println("Returned to Menu.");
                     break;
                 case 4:
