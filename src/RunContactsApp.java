@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class RunContactsApp {
         System.out.println("Enter phone number: \n");
         Scanner sc = new Scanner(System.in);
         String ph = sc.nextLine();
-        String contactInfo = name + " " + ph;
+        String contactInfo = name + " | " + ph;
         String contactsDirectory = "contactsData";
         String contactList = "contactsList.txt";
 
@@ -40,7 +41,6 @@ public class RunContactsApp {
         Path dataDirectory = Paths.get(directory);
         Path dataFile = Paths.get(directory, filename);
 
-
         try {
             if (Files.notExists(dataDirectory)) {
                 Files.createDirectory(dataDirectory);
@@ -60,18 +60,39 @@ public class RunContactsApp {
             iox.printStackTrace();
         }
     }
-
+    public static void removeContact(){
+        viewList();
+        String contactsDirectory = "contactsData";
+        String contactList = "contactsList.txt";
+        Path contactsFile = Paths.get(contactsDirectory, contactList);
+        System.out.println("Please enter the contact you would like to remove.");
+        Scanner scn = new Scanner(System.in);
+        String userInput = scn.nextLine();
+        try{
+            List<String> contacts = Files.readAllLines(Paths.get(contactsDirectory, contactList));
+            List<String> bucket = new ArrayList<>();
+            for(String contact : contacts){
+                if(!contact.equalsIgnoreCase(userInput)){
+                    bucket.add(contact);
+                }
+                System.out.println(bucket);
+                Files.write(contactsFile, bucket);
+            }
+        }catch(IOException iox){
+            iox.printStackTrace();
+        }
+    }
 
 
     public static void runContactsApp(){
         boolean run = true;
         while(run){
-            System.out.println("1. View Contacts\n");
-            System.out.println("2. Add a new Contact.\n");
-            System.out.println("3. Search a contact by name.\n");
-            System.out.println("4. Delete an existing contact.\n");
-            System.out.println("5. Exit\n");
-            System.out.println("Enter an option: (1, 2, 3, 4, or 5\n");
+            System.out.println("1. View Contacts");
+            System.out.println("2. Add a new Contact.");
+            System.out.println("3. Search a contact by name.");
+            System.out.println("4. Delete an existing contact.");
+            System.out.println("5. Exit.");
+            System.out.println("Enter an option: (1, 2, 3, 4, or 5");
             Scanner scn = new Scanner(System.in);
             int userinput = scn.nextInt();
             switch (userinput){
@@ -88,7 +109,7 @@ public class RunContactsApp {
                     System.out.println("Returned to Menu.");
                     break;
                 case 4:
-                    // delete contact (by name)
+                    removeContact();
                     System.out.println("Returned to Menu.");
                     break;
                 case 5:
