@@ -23,7 +23,6 @@ public class RunContactsApp {
         String contactsDirectory = "contactsData";
         String contactList = "contactsList.txt";
 
-//        Path contactDataList = Paths.get(contactsDirectory);
         Path contactsFile = Paths.get(contactsDirectory, contactList);
 
         try{
@@ -127,6 +126,19 @@ public static void contactSearch(){
         }
     }
 
+    public static void exitFunction(){
+        String directory = "contactsData";
+        String filename = "contactsList.txt";
+        Path dataFile = Paths.get(directory, filename);
+        try{
+            List<String> contacts = Files.readAllLines(dataFile);
+            Files.write(dataFile, contacts);
+
+        } catch (IOException iox){
+            iox.printStackTrace();
+        }
+
+    }
     public static void runContactsApp(){
         boolean run = true;
         while(run){
@@ -135,7 +147,7 @@ public static void contactSearch(){
             System.out.println("3. Search a contact by name.\n");
             System.out.println("4. Delete an existing contact.\n");
             System.out.println("5. Exit\n");
-            System.out.println("Enter an option: (1, 2, 3, 4, or 5\n");
+            System.out.println("Enter an option: (1, 2, 3, 4, or 5\n)");
             Scanner scn = new Scanner(System.in);
             int userinput = scn.nextInt();
             switch (userinput){
@@ -156,7 +168,7 @@ public static void contactSearch(){
                     System.out.println("Returned to Menu.");
                     break;
                 case 5:
-                    // exit function/app
+                    exitFunction();
                     System.out.println("Exiting application. ");
                     run = false;
                     break;
