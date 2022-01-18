@@ -59,49 +59,50 @@ public class RunContactsApp {
             iox.printStackTrace();
         }
     }
-public static void contactSearch(){
+    public static void contactSearch(){
         String directory = "contactsData";
         String filename = "contactsList.txt";
-//
-        Path dataDirectory = Paths.get(directory);
         Path dataFile = Paths.get(directory, filename);
 
-        System.out.println("Please enter Name or Number you would like to search");
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine();
-
-        String keepGoing = "yes";
+        boolean keepGoing = true;
 
         do {
-        try{
-        List<String> contacts = Files.readAllLines(dataFile);
-        for (String contact : contacts) {
-        if (userInput.equalsIgnoreCase(contact)) {
-        System.out.println("The contact info you entered matches: " + contact);
-        break;
-        } else {
-        System.out.println("Did not find a match.");
-        }
+            boolean found = true;
+            try{
+                List<String> contacts = Files.readAllLines(dataFile);
+                System.out.println("Input your name.");
+                Scanner sc = new Scanner(System.in);
+                String userInput = sc.nextLine();
 
-        }
+                for (int i =0; i < contacts.size(); i++) {
+//                    System.out.println(contacts.get(i));
+                    if (contacts.get(i).toLowerCase().contains(userInput.toLowerCase())) {
+                        System.out.println(contacts.get(i));
+                        found = false;
 
-        } catch (IOException iox){
-        iox.printStackTrace();
-        }
+                    } else {
+                        if(found && i == contacts.size()-1)
+                            System.out.println("Did not find a match.");
 
-        System.out.println("Try again? yes/no");
-        Scanner scn = new Scanner(System.in);
-        keepGoing = scn.next();
-        if(keepGoing.equalsIgnoreCase("no")){
-        break;
-        }
+                    }
+
+                }
+                System.out.println("Would you like to continue? yes/no");
+                String proceed = "yes";
+                String notproceeding = "no";
+                String userChoice = sc.nextLine();
+                if(userChoice.equalsIgnoreCase("yes")){
+                    keepGoing = true;
+                } else if(userChoice.equalsIgnoreCase("no")){
+                    keepGoing = false;
+                }
 
 
-        System.out.println("enter a name.");
-        Scanner sc = new Scanner(System.in);
-        userInput = sc.nextLine();
-        } while  (keepGoing.equalsIgnoreCase("yes") );
-        }
+            } catch (IOException iox){
+                iox.printStackTrace();
+            }
+        } while  (keepGoing);
+    }
 
     public static void removeContact(){
         viewList();

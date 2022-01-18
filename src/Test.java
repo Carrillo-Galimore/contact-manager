@@ -65,49 +65,71 @@ public class Test {
 //        }
 //    }
 //
-        public static void contactSearch(){
-            String directory = "contactsData";
-            String filename = "contactsList.txt";
+//public static void contactSearch(){
+//    viewList();
+//    String directory = "contactsData";
+//    String filename = "contactsList.txt";
+//    Path dataFile = Paths.get(directory, filename);
+//
+//    boolean keepGoing = true;
+//
+//    do {
+//        System.out.println("Please enter Name or Number you would like to search");
+//        Scanner scanner = new Scanner(System.in);
+//        String userInput = scanner.nextLine();
+//        try{
+//
+//            List<String> contacts = Files.readAllLines(dataFile);
+//            boolean notFound = true;
+//            for (String contact : contacts) {
+//                if (userInput.equalsIgnoreCase(contact)) {
+//                    System.out.println("Contact found: " + contact);
+//                    keepGoing = false;
+//                    notFound = false;
+//                    break;
+//                }
+//            }
+//            if (notFound){
+//                System.out.println("not found");
+//                System.out.println("try again? true/false");
+//                Scanner sc = new Scanner(System.in);
+//                keepGoing = sc.nextBoolean();
+//            }
+//        } catch (IOException iox){
+//            iox.printStackTrace();
+//        }
+//    } while  (keepGoing);
+//}
 
-            Path dataDirectory = Paths.get(directory);
-            Path dataFile = Paths.get(directory, filename);
 
-            System.out.println("Please enter Name or Number you would like to search");
-            Scanner scanner = new Scanner(System.in);
-            String userInput = scanner.nextLine();
-
-            String keepGoing = "yes";
-
-            do {
-                try{
-                    List<String> contacts = Files.readAllLines(dataFile);
-                    for (String contact : contacts) {
-                        if (userInput.equalsIgnoreCase(contact)) {
-                            System.out.println("The contact info you entered matches: " + contact);
-                            break;
-                        } else {
-                            System.out.println("Did not find a match.");
-                        }
-
-                    }
-
-                } catch (IOException iox){
-                    iox.printStackTrace();
-                }
-
-                System.out.println("Try again? yes/no");
-                Scanner scn = new Scanner(System.in);
-                keepGoing = scn.next();
-                if(keepGoing.equalsIgnoreCase("no")){
-                    break;
-                }
+//        public static void deleteThem() throws IOException {
+//            String directory = "contactsData";
+//            String filename = "contactsList.txt";
+//
+//            Path dataDirectory = Paths.get(directory);
+//            Path dataFile = Paths.get(directory, filename);
+//
+//            System.out.println("Who would you like to remove?");
+//            Scanner scanner1  = new Scanner(System.in);
+//            String userRemove = scanner1.nextLine();
+//            StringBuilder stringBuilder = new StringBuilder(userRemove);
+//            List<String> contacts = Files.readAllLines(dataFile);
+//            for (String contact : contacts) {
+//                if (userRemove.equalsIgnoreCase(contact)) {
+//                    StringBuilder remove = stringBuilder.delete(0,300);
+//                    System.out.println(contact + " has been removed.");
+//
+//                    break;
+//                }
+////                System.out.println(remove);
+//
+//            }
+//
+//        }
 
 
-                System.out.println("enter a name.");
-                Scanner sc = new Scanner(System.in);
-                userInput = sc.nextLine();
-            } while  (keepGoing.equalsIgnoreCase("yes") );
-        }
+
+
 
 
         public static void main (String[]args) throws IOException {
@@ -116,8 +138,10 @@ public class Test {
 //            ppl.add(2);
 //            ppl.add(11122.33);
 //            System.out.println(ppl);
-            viewList();
-            contactSearch();
+//            viewList();
+//            contactSearch();
+//            deleteThem();
+
         }
 
 
